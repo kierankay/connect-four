@@ -31,11 +31,9 @@ function createRowArray() {
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-board = makeBoard(board)
-
 function makeHtmlBoard() {
   // TODO: get "board" variable from the item in HTML w/ID of "board"
-  let table = document.getElementById("board");
+  let HTMLBoard = document.getElementById("board");
   
   // Creating the top row to drive our user interface
   var top = document.createElement("tr");
@@ -48,7 +46,7 @@ function makeHtmlBoard() {
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
-  board.append(top);
+  HTMLBoard.append(top);
 
   // Generating the rest of our game board
   for (var y = 0; y < HEIGHT; y++) {
@@ -58,7 +56,7 @@ function makeHtmlBoard() {
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
     }
-    board.append(row);
+    HTMLBoard.append(row);
   }
 }
 
