@@ -107,7 +107,11 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
-
+  if (currPlayer === 1) {
+    board[y][x] = 1;
+  } else {
+    board[y][x] = 2;
+  }
   // check for win
   if (checkForWin()) {
     return endGame(`Player ${currPlayer} won!`);
@@ -115,10 +119,27 @@ function handleClick(evt) {
   
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+  
 
+  // loop through each row
+  // if row has some null values
+    // if no null values by the end of the loop, then call endgame function
+  // exit the loop
+  function checkNull(el) {
+    return el !== null;
+  }
+  
+  if (board[0].every(checkNull)) {
+    return endGame(`Tie Game!`);
+  }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-}
+  if (currPlayer === 1) {
+    currPlayer = 2;
+  } else {
+    currPlayer = 1;
+  }
+};
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
