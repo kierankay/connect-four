@@ -15,12 +15,11 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard(gameBoard) {
+function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for (let row = 0; row < HEIGHT; row++) {
-    gameBoard.push(createRowArray())
+    board.push(createRowArray());
   }
-  return gameBoard;
 }
 
 function createRowArray() {
@@ -61,10 +60,15 @@ function makeHtmlBoard() {
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let y = board.length; y > 0; y--) {
+    let curColElement = board[y][x];
+    if (curColElement === null) {
+      return y;
+    } 
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
