@@ -15,20 +15,34 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard() {
+function makeBoard(gameBoard) {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let row = 0; row < HEIGHT; row++) {
+    gameBoard.push(createRowArray())
+  }
+  return gameBoard;
+}
+
+function createRowArray() {
+  let newRow = [];
+  newRow.length = WIDTH;
+  newRow.fill(null);
+  return newRow;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
+board = makeBoard(board)
 
 function makeHtmlBoard() {
   // TODO: get "board" variable from the item in HTML w/ID of "board"
-
-  // TODO: add comment for this code
+  let table = document.getElementById("board");
+  
+  // Creating the top row to drive our user interface
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
+  // Creating the table cells for our top row
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -36,7 +50,7 @@ function makeHtmlBoard() {
   }
   board.append(top);
 
-  // TODO: add comment for this code
+  // Generating the rest of our game board
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
