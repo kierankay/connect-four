@@ -15,20 +15,24 @@
   width: 80%;
   height: 80%;
   border-radius: 50px;
+  top: 0px;
   position: absolute;
-  top: -500px;
+  animation-name: drop;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in; 
+}
+
+@keyframes drop {
+  from {top: -500px;}
+  to {top: 0px;}
 }
 
 .p1 {
   background-color: red;
-  top: 0px;
-  transition: top .25s ease-in;
 }
 
 .p2 {
   background-color: blue;
-  top: 0px;
-  transition: top .25s ease-in;
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
