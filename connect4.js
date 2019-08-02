@@ -33,7 +33,7 @@ function createRowArray() {
 function makeHtmlBoard() {
   // TODO: get "board" variable from the item in HTML w/ID of "board"
   let HTMLBoard = document.getElementById("board");
-  
+
   // Creating the top row to drive our user interface
   var top = document.createElement("tr");
   top.setAttribute("id", "column-top");
@@ -66,7 +66,7 @@ function findSpotForCol(x) {
     let curColElement = board[y][x];
     if (curColElement === null) {
       return y;
-    } 
+    }
   }
   return 0;
 }
@@ -76,12 +76,7 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   let piece = document.createElement('div');
-  piece.classList.add('piece');
-  if (currPlayer === 1) {
-    piece.classList.add('p1');
-  } else {
-    piece.classList.add('p2');
-  }
+  piece.classList.add('piece', `p${currPlayer}`)
   let correctCell = document.getElementById(`${y}-${x}`);
   correctCell.append(piece);
 }
@@ -89,7 +84,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 function endGame(msg) {
   // TODO: pop up alert message
-  
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -107,38 +102,31 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
-  if (currPlayer === 1) {
-    board[y][x] = 1;
-  } else {
-    board[y][x] = 2;
-  }
+  currPlayer === 1 ? : board[y][x] = 1: board[y][x] = 2;
+
   // check for win
   if (checkForWin()) {
     return endGame(`Player ${currPlayer} won!`);
   }
-  
+
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  
+
 
   // loop through each row
   // if row has some null values
-    // if no null values by the end of the loop, then call endgame function
+  // if no null values by the end of the loop, then call endgame function
   // exit the loop
   function checkNull(el) {
     return el !== null;
   }
-  
+
   if (board[0].every(checkNull)) {
-    return endGame(`Tie Game!`);
+    return endGame('Tie Game!');
   }
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-  if (currPlayer === 1) {
-    currPlayer = 2;
-  } else {
-    currPlayer = 1;
-  }
+  currPlayer = currPlayer === 1 ? 2 : 1;
 };
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -150,12 +138,12 @@ function checkForWin() {
     //  - returns true if all are legal coordinates & all match currPlayer
 
     return cells.every(
-        ([y, x]) =>
-            y >= 0 &&
-            y < HEIGHT &&
-            x >= 0 &&
-            x < WIDTH &&
-            board[y][x] === currPlayer
+      ([y, x]) =>
+      y >= 0 &&
+      y < HEIGHT &&
+      x >= 0 &&
+      x < WIDTH &&
+      board[y][x] === currPlayer
     );
   }
 
@@ -163,10 +151,30 @@ function checkForWin() {
 
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+      var horiz = [
+        [y, x],
+        [y, x + 1],
+        [y, x + 2],
+        [y, x + 3]
+      ];
+      var vert = [
+        [y, x],
+        [y + 1, x],
+        [y + 2, x],
+        [y + 3, x]
+      ];
+      var diagDR = [
+        [y, x],
+        [y + 1, x + 1],
+        [y + 2, x + 2],
+        [y + 3, x + 3]
+      ];
+      var diagDL = [
+        [y, x],
+        [y + 1, x - 1],
+        [y + 2, x - 2],
+        [y + 3, x - 3]
+      ];
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
