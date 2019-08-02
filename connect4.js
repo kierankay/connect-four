@@ -65,7 +65,6 @@ function findSpotForCol(x) {
   for (let y = board.length - 1; y >= 0; y--) {
     let curColElement = board[y][x];
     if (curColElement === null) {
-      console.log(y);
       return y;
     }
   }
