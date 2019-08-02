@@ -65,10 +65,11 @@ function findSpotForCol(x) {
   for (let y = board.length - 1; y >= 0; y--) {
     let curColElement = board[y][x];
     if (curColElement === null) {
+      console.log(y);
       return y;
     }
   }
-  return 0;
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -76,10 +77,9 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   let piece = document.createElement('div');
-  piece.classList.add('piece') 
+  piece.classList.add('piece', `p${currPlayer}`) 
   let correctCell = document.getElementById(`${y}-${x}`);
   correctCell.append(piece);
-  setTimeout(function() {piece.classList.add(`p${currPlayer}`)},0);
 }
 
 /** endGame: announce game end */
